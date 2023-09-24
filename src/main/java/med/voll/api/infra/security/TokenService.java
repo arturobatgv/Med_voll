@@ -20,7 +20,7 @@ public class TokenService {
 
     @Value("${api.security.secret}")
     private String apiSecret;
-
+//primer cambio Intelij
     public String generarToken(Usuario usuario){
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);

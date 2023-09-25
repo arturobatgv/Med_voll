@@ -6,7 +6,7 @@ import med.voll.api.domain.medico.Especialidad;
 
 import java.time.LocalDateTime;
 
-public record DatosAgendarCounsulta(Long id, @NotNull Long idPaciente,
+public record DatosAgendarCounsulta(@NotNull Long idPaciente,
                                     Long idMedico,
                                     @NotNull @Future LocalDateTime fecha,
                                     Especialidad especialidad) {

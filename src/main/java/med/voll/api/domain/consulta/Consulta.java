@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity(name = "Consulta")
 @Table(name = "consultas")
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Consulta {
@@ -30,11 +31,5 @@ public class Consulta {
 
     private LocalDateTime fecha;
 
-
-    public Consulta(Long id, Medico medico, Paciente paciente, LocalDateTime fecha) {
-        this.id = id;
-        this.medico = medico;
-        this.paciente = paciente;
-        this.fecha = fecha;
-    }
 }
+

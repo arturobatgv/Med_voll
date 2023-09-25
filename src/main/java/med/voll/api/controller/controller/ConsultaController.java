@@ -15,7 +15,7 @@ public class ConsultaController {
 
 
     @Autowired
-    private AgendaConsutaService agendaConsutaService;
+    private AgendaConsultaService agendaConsultaService;
     @Autowired
     private ConsultaRepositorio consultaRepositorio;
 
@@ -23,7 +23,7 @@ public class ConsultaController {
     @Transactional
     public ResponseEntity <DatosDetalleConsulta>agendar(@RequestBody @Valid DatosAgendarCounsulta datosAgendarCounsulta){
 
-        agendaConsutaService.agendar(datosAgendarCounsulta);
+        agendaConsultaService.agendar(datosAgendarCounsulta);
         return ResponseEntity.ok(new DatosDetalleConsulta(null,null,null,null));
     }
 }

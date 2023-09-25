@@ -19,9 +19,9 @@ public class AgendaConsultaService {
     private MedicoRepositorio medicoRepositorio;
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
-
+    @Autowired
     List<ValidadorDeConsultas> validadores;
-    public void agendar(DatosAgendarCounsulta datosAgendarCounsulta){
+    public DatosDetalleConsulta agendar(DatosAgendarCounsulta datosAgendarCounsulta){
         if (!pacienteRepositorio.findById(datosAgendarCounsulta.idPaciente()).isPresent()){
             throw new ValidacionExistencia("El paciente no se encuentra en la base de datos");
 
@@ -33,16 +33,18 @@ public class AgendaConsultaService {
 
         Paciente paciente = pacienteRepositorio.findById(datosAgendarCounsulta.idPaciente()).get();
         Medico medico = escogerMedico(datosAgendarCounsulta);
+        if (medico ==null){
+            throw new ValidacionExistencia("No existen médicos disponibles para este horario y especialidad");
 
-
+        }
         Consulta consulta = new Consulta(null, medico,paciente, datosAgendarCounsulta.fecha());
         consultaRepositorio.save(consulta);
-
+        return new DatosDetalleConsulta(consulta);
     }
 
     private Medico escogerMedico(DatosAgendarCounsulta datosAgendarCounsulta) {
     if (datosAgendarCounsulta.idMedico()!= null){
-        medicoRepositorio.findById(datosAgendarCounsulta.idMedico());
+        return medicoRepositorio.getReferenceById(datosAgendarCounsulta.idMedico());
     }
     if(datosAgendarCounsulta.especialidad()== null){
         throw new ValidacionExistencia("Debe seleccionar una especialidad para el médico");

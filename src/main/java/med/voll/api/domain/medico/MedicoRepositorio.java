@@ -4,9 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-
+@Repository
 public interface MedicoRepositorio extends JpaRepository<Medico, Long>{
 
 
@@ -29,7 +30,7 @@ public interface MedicoRepositorio extends JpaRepository<Medico, Long>{
     Medico seleccionarMedicoConEspecialidadEnfecha(Especialidad especialidad, LocalDateTime fecha);
 
     @Query("""
-            select m.activo from Medico m where m.id =: idMedico
+            select m.activo from Medico m where m.id=:idMedico
             """)
     Boolean findActivoById(Long idMedico);
 }

@@ -20,6 +20,11 @@ public class TratadorErrores {
         return ResponseEntity.badRequest().body(errores);
     }
 
+    @ExceptionHandler(ValidacionExistencia.class)
+    public  ResponseEntity controlarHandlerValidacionNegocios(Exception e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
     private record DatosErrorValidacion(String campo, String error){
         public DatosErrorValidacion(FieldError error){
             this(error.getField(), error.getDefaultMessage());

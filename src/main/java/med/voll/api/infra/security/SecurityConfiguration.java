@@ -27,7 +27,7 @@ public class SecurityConfiguration {
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).//Indicamos el tipo de sesión
                 authorizeRequests(aut ->  aut.requestMatchers(HttpMethod.POST, "/login").
-                        permitAll().anyRequest().authenticated())
+                        permitAll().requestMatchers("/swagger-ui.html","/v3/api-docs/**","/swagger-ui/**").permitAll().anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 //.requestMatchers(HttpMethod.DELETE,"/medicos").hasRole("pedrito.sola").requestMatchers(HttpMethod.DELETE, "/paciente").hasRole("pedrito.sola").

@@ -32,12 +32,15 @@ class MedicoRepositorioTest {
     @Test
     @DisplayName("Deberia retorrnar nulo cuando el medico se encuentre en consulta con otro paciente en ese horario")
     void seleccionarMedicoConEspecialidadEnfecha() {
+        //given set of valors
         var proximoLunes10Am = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,0);
         var medico = registrarMedico("Jose Dolores","josesito@gmail.com","123456",Especialidad.CARDIOLOGIA);
         var paciente = registrarPaciente("Antonio Delgado", "alola@gmail.com","654321");
         registrarConsulta(medico,paciente,proximoLunes10Am);
-        var medicoLibre = medicoRepositorio.seleccionarMedicoConEspecialidadEnfecha(Especialidad.CARDIOLOGIA,proximoLunes10Am);
 
+        //when do a  action
+        var medicoLibre = medicoRepositorio.seleccionarMedicoConEspecialidadEnfecha(Especialidad.CARDIOLOGIA,proximoLunes10Am);
+        //then
         Assertions.assertThat(medicoLibre).isNull();
     }
 
